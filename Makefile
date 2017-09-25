@@ -1,6 +1,6 @@
 SHELL = /bin/sh
 
-PROJECT  := project_name
+PROJECT  := tic-tac-toe
 
 # ------------------
 # External programs
@@ -20,8 +20,8 @@ FILES_O  := $(FILES_C:.c=.o)
 # ------------
 # Flags
 # ------------
-CFLAGS  := -Wall
-LFLAGS  :=
+CFLAGS  := -Wall -I/usr/include/allegro5 
+LFLAGS  := -L/usr/lib 
 
 # ------------
 # Targets
@@ -32,7 +32,7 @@ default: $(PROJECT)
 	$(CC) -c -I $(D_SRC) $(CFLAGS) $< -o $@
 
 $(PROJECT): $(FILES_O)
-	$(CC) -I $(D_SRC) $(LFLAGS) $(FILES_O) -o $@
+	$(CC) -I $(D_SRC) $(LFLAGS) $(FILES_O) -o $@ `pkg-config --libs allegro-5`
 
 .phony: doxygen
 doxygen:
