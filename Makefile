@@ -22,6 +22,7 @@ FILES_O  := $(FILES_C:.c=.o)
 # ------------
 CFLAGS  := -Wall -I/usr/include/allegro5 
 LFLAGS  := -L/usr/lib 
+LIBALLEGRO := `pkg-config --libs allegro-5 allegro_font-5 allegro_ttf-5`
 
 # ------------
 # Targets
@@ -32,7 +33,7 @@ default: $(PROJECT)
 	$(CC) -c -I $(D_SRC) $(CFLAGS) $< -o $@
 
 $(PROJECT): $(FILES_O)
-	$(CC) -I $(D_SRC) $(LFLAGS) $(FILES_O) -o $@ `pkg-config --libs allegro-5`
+	$(CC) -I $(D_SRC) $(LFLAGS) $(FILES_O) -o $@ $(LIBALLEGRO)
 
 .phony: doxygen
 doxygen:
