@@ -1,0 +1,22 @@
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
+#define FIELD_SIZE 3
+
+#define CELL_WH 50
+#define CELL_BORDER_SIZE 5
+#define CELL_FONT_SIZE 30
+
+#define BUTTON_WIDTH 100
+#define BUTTON_HEIGHT 50
+#define BUTTON_BORDER_SIZE 5
+#define BUTTON_FONT_SIZE 26
+
+#define LABEL_WIDTH 150
+#define LABEL_HEIGHT 50
+#define LABEL_BORDER_SIZE 5
+#define LABEL_FONT_SIZE 26
+
+#define NUM_BUTTON_TARGER 1
+
+#endif

@@ -1,4 +1,5 @@
 #include "game.h"
+#include "constants.h"
 
 #include <stdlib.h>
 
@@ -17,12 +18,12 @@ players search_win(players** field, players p);
 game* game_create(players player)
 {
 	game* gm = malloc(sizeof(*gm));
-	gm->field = calloc(SIZE_FIELD, sizeof(*(gm->field)));
+	gm->field = calloc(FIELD_SIZE, sizeof(*(gm->field)));
 
 	int i, j;
-	for (i = 0; i < SIZE_FIELD; ++i) {
-		gm->field[i] = calloc(SIZE_FIELD, sizeof(*(gm->field[i])));
-		for (j = 0; j < SIZE_FIELD; ++j) {
+	for (i = 0; i < FIELD_SIZE; ++i) {
+		gm->field[i] = calloc(FIELD_SIZE, sizeof(*(gm->field[i])));
+		for (j = 0; j < FIELD_SIZE; ++j) {
 			gm->field[i][j] = EMPTY;
 		}
 	}
@@ -66,7 +67,7 @@ bool game_is_draw(game* gm)
 void game_destroy(game* gm)
 {
 	int i;
-	for (i = 0; i < SIZE_FIELD; ++i) {
+	for (i = 0; i < FIELD_SIZE; ++i) {
 		free(gm->field[i]);
 	}
 	free(gm->field);
@@ -75,11 +76,11 @@ void game_destroy(game* gm)
 
 void game_run_pc(game* gm)
 {
-	players** copy_field = calloc(SIZE_FIELD, sizeof(*copy_field));
+	players** copy_field = calloc(FIELD_SIZE, sizeof(*copy_field));
 	int i, j;
-	for (i = 0; i < SIZE_FIELD; ++i) {
-		copy_field[i] = calloc(SIZE_FIELD, sizeof(*(copy_field[i])));
-		for (int j = 0; j < SIZE_FIELD; ++j) {
+	for (i = 0; i < FIELD_SIZE; ++i) {
+		copy_field[i] = calloc(FIELD_SIZE, sizeof(*(copy_field[i])));
+		for (int j = 0; j < FIELD_SIZE; ++j) {
 			copy_field[i][j] = gm->field[i][j];
 		}
 	}
@@ -89,8 +90,8 @@ void game_run_pc(game* gm)
 
 	int move_row = -1;
 	int move_col = -1;
-	for (i = 0; i < SIZE_FIELD; ++i) {
-		for (j = 0; j < SIZE_FIELD; ++j) {
+	for (i = 0; i < FIELD_SIZE; ++i) {
+		for (j = 0; j < FIELD_SIZE; ++j) {
 			if (copy_field[i][j] != EMPTY) continue;
 
 			copy_field[i][j] = pc;
@@ -105,7 +106,7 @@ void game_run_pc(game* gm)
 		} 
 	}
 
-	for (i = 0; i < SIZE_FIELD; ++i) {
+	for (i = 0; i < FIELD_SIZE; ++i) {
 		free(copy_field[i]);
 	}
 	free(copy_field);
@@ -134,33 +135,33 @@ void change_current_player(game* gm)
 bool check_win(players** field, players p)
 {
 	int i, j, count;
-	for (i = 0; i < SIZE_FIELD; ++i) {
+	for (i = 0; i < FIELD_SIZE; ++i) {
 		count = 0;
-		for (j = 0; j < SIZE_FIELD; ++j) {
+		for (j = 0; j < FIELD_SIZE; ++j) {
 			if (field[i][j] == p) ++count;
 		}
-		if (count == SIZE_FIELD) return true;
+		if (count == FIELD_SIZE) return true;
 	}
 
-	for (int j = 0; j < SIZE_FIELD; ++j) {
+	for (int j = 0; j < FIELD_SIZE; ++j) {
 		count = 0;
-		for (i = 0; i < SIZE_FIELD; ++i) {
+		for (i = 0; i < FIELD_SIZE; ++i) {
 			if (field[i][j] == p) ++count;
 		}
-		if (count == SIZE_FIELD) return true;
+		if (count == FIELD_SIZE) return true;
 	}
 
 	count = 0;
-	for (i = 0; i < SIZE_FIELD; ++i) {
+	for (i = 0; i < FIELD_SIZE; ++i) {
 		if (field[i][i] == p) ++count;
 	}
-	if (count == SIZE_FIELD) return true;
+	if (count == FIELD_SIZE) return true;
 
 	count = 0;
-	for (i = 0; i < SIZE_FIELD; ++i) {
-		if (field[i][SIZE_FIELD - i - 1] == p) ++count;
+	for (i = 0; i < FIELD_SIZE; ++i) {
+		if (field[i][FIELD_SIZE - i - 1] == p) ++count;
 	}
-	if (count == SIZE_FIELD) return true;
+	if (count == FIELD_SIZE) return true;
 
 	return false;
 }
@@ -168,8 +169,8 @@ bool check_win(players** field, players p)
 bool check_draw(players** field)
 {
 	int i, j;
-	for (i = 0; i < SIZE_FIELD; ++i) {
-		for (j = 0; j < SIZE_FIELD; ++j) {
+	for (i = 0; i < FIELD_SIZE; ++i) {
+		for (j = 0; j < FIELD_SIZE; ++j) {
 			if (field[i][j] == EMPTY) return false;
 		}
 	}
@@ -191,8 +192,8 @@ players search_win(players** field, players player)
 
 	players win = back_player(player);
 	int i, j;
-	for (i = 0; i < SIZE_FIELD; ++i) {
-		for (j = 0; j < SIZE_FIELD; ++j) {
+	for (i = 0; i < FIELD_SIZE; ++i) {
+		for (j = 0; j < FIELD_SIZE; ++j) {
 			if (field[i][j] != EMPTY) continue;
 
 			field[i][j] = player;

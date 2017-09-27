@@ -8,8 +8,6 @@
 #include <stdlib.h>
 #include <stdio.h> //DEBUG
 
-#define NUM_BUTTON_MOUSE 1
-
 #define PARAM_FIELD_X 0.5
 #define PARAM_FIELD_Y 0.5
 
@@ -77,7 +75,7 @@ void win_game_start(win_game* w_gm)
 
 		if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
 			exit(-1);
-		} else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP && ev.mouse.button == NUM_BUTTON_MOUSE) {
+		} else if (ev.type == ALLEGRO_EVENT_MOUSE_BUTTON_UP && ev.mouse.button == NUM_BUTTON_TARGER) {
 			int x = ev.mouse.x;
 			int y = ev.mouse.y;
 

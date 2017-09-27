@@ -3,8 +3,6 @@
 
 #include <stdbool.h>
 
-#define FIELD_SIZE 3
-
 enum players
 {
 	CROSS,

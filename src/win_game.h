@@ -3,6 +3,7 @@
 
 #include "title.h"
 #include "game.h"
+#include "constants.h"
 
 #include <allegro5/allegro.h>
 
