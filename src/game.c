@@ -173,7 +173,7 @@ bool check_draw(players** field)
 	int i, j;
 	for (i = 0; i < SIZE_FIELD; ++i) {
 		for (j = 0; j < SIZE_FIELD; ++j) {
-			if (field[i][j] != EMPTY) return false;
+			if (field[i][j] == EMPTY) return false;
 		}
 	}
 	return true;
