@@ -10,9 +10,9 @@
 #define PARAM_START_X 0.3
 #define PARAM_START_Y 0.25
 #define PARAM_BETWEEN 1.5
+#define PARAM_HALF 0.5
 
 #define max(a, b) (((a) > (b)) ? (a) : (b))
-
 
 static void draw(win_menu* win_me);
 
@@ -25,23 +25,23 @@ win_menu* win_menu_create(ALLEGRO_DISPLAY* display)
 
 	float width_max = max(max(LABEL_WIDTH, BUTTON_WIDTH), CELL_WH);
 
-	float xt = x + (width_max - LABEL_WIDTH) / 2;
+	float xt = x + (width_max - LABEL_WIDTH) * PARAM_HALF;
 	rectangle* rect = rectangle_create(xt, y, LABEL_WIDTH, LABEL_HEIGHT, COLOR_LABEL_BACKGROUND, COLOR_LABEL_BORDER, LABEL_BORDER_SIZE);
 	win_me->mess = title_create(rect, STR_MESS_SELECT, LABEL_FONT_SIZE, COLOR_LABEL_TEXT);
 
-	y+= LABEL_HEIGHT * 1.5;
+	y+= LABEL_HEIGHT * PARAM_BETWEEN;
 
-	xt = x + (width_max / 2 - CELL_WH) / 2;
+	xt = x + (width_max * PARAM_HALF - CELL_WH) * PARAM_HALF;
 	rect = rectangle_create(xt, y, CELL_WH, CELL_WH, COLOR_CELL_BACKGROUND, COLOR_CELL_BORDER, CELL_BORDER_SIZE);
 	win_me->cross = title_create(rect, STR_CROSS, CELL_FONT_SIZE, COLOR_CELL_TEXT);
 
-	xt = x + width_max / 2 + (width_max / 2 - CELL_WH) / 2;
+	xt = x + width_max * PARAM_HALF + (width_max * PARAM_HALF - CELL_WH) * PARAM_HALF;
 	rect = rectangle_create(xt, y, CELL_WH, CELL_WH, COLOR_CELL_BACKGROUND, COLOR_CELL_BORDER, CELL_BORDER_SIZE);
 	win_me->zero = title_create(rect, STR_ZERO, CELL_FONT_SIZE, COLOR_CELL_TEXT);
 
-	y += CELL_WH * 1.5;
+	y += CELL_WH * PARAM_BETWEEN;
 
-	xt = x + (width_max - BUTTON_WIDTH) / 2 ;
+	xt = x + (width_max - BUTTON_WIDTH) * PARAM_HALF;
 	rect = rectangle_create(xt, y, BUTTON_WIDTH, BUTTON_HEIGHT, COLOR_BUTTON_BACKGROUND, COLOR_BUTTON_BORDER, BUTTON_BORDER_SIZE);
 	win_me->exit = title_create(rect, STR_EXIT, BUTTON_FONT_SIZE, COLOR_BUTTON_TEXT);
 

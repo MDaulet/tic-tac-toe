@@ -14,6 +14,7 @@
 #define PARAM_BUTTON_X 0.5
 #define PARAM_BUTTON_Y 1.5
 
+#define PARAM_MESS_X 0.5
 #define PARAM_MESS_Y 1.5
 
 void update_field(win_game* w_gm);
@@ -36,17 +37,17 @@ win_game* win_game_create(ALLEGRO_DISPLAY* display, players player)
 			float y = start_y + i * CELL_WH;
 
 			rectangle* rect = rectangle_create(x, y, CELL_WH, CELL_WH, COLOR_CELL_BACKGROUND, COLOR_CELL_BORDER, CELL_BORDER_SIZE);
-			w_gm->field[i][j] = title_create(rect, "", CELL_FONT_SIZE, COLOR_CELL_TEXT);
+			w_gm->field[i][j] = title_create(rect, STR_EMPTY, CELL_FONT_SIZE, COLOR_CELL_TEXT);
 		}
 	} 
 
-	float x = (al_get_display_width(display) - CELL_WH * FIELD_SIZE) * PARAM_BUTTON_X;
+	float x = (al_get_display_width(display) - BUTTON_WIDTH) * PARAM_BUTTON_X;
 	float y = al_get_display_height(display) - BUTTON_HEIGHT * PARAM_BUTTON_Y;
 
 	rectangle* rect = rectangle_create(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, COLOR_BUTTON_BACKGROUND, COLOR_BUTTON_BORDER, BUTTON_BORDER_SIZE);
 	w_gm->button = title_create(rect, STR_BACK, BUTTON_FONT_SIZE, COLOR_BUTTON_TEXT);
 
-	x = (al_get_display_width(display) - LABEL_WIDTH) / 2;
+	x = (al_get_display_width(display) - LABEL_WIDTH) * PARAM_MESS_X;
 	y = start_y - LABEL_HEIGHT * PARAM_MESS_Y;
 	rect = rectangle_create(x, y, LABEL_WIDTH, LABEL_HEIGHT, COLOR_LABEL_BACKGROUND, COLOR_LABEL_BORDER, LABEL_BORDER_SIZE);
 	w_gm->mess = title_create(rect, "", LABEL_FONT_SIZE, COLOR_LABEL_TEXT);
