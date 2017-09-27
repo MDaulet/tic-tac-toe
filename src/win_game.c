@@ -1,24 +1,12 @@
 #include "win_game.h"
 #include "rectangle.h"
 #include "color.h"
+#include "str.h"
+#include "constants.h"
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h> //DEBUG
-
-#define SIZE_CELL 50
-#define SIZE_TEXT_IN_CELL 26
-#define SIZE_CELL_BORDER 3
-
-#define BUTTON_WIDTH 150
-#define BUTTON_HEIGHT 50
-#define BUTTON_SIZE_TEXT 26
-#define BUTTON_SIZE_BORDER 5
-#define BUTTON_TEXT "Back"
-
-#define CROSS_STR "X"
-#define ZERO_STR "0"
-#define EMPTY_STR ""
 
 #define NUM_BUTTON_MOUSE 1
 
@@ -30,13 +18,6 @@
 
 #define PARAM_MESS_Y 1.5
 
-#define MESS_WIDTH 200
-#define MESS_HEIGHT 50
-
-#define STR_WIN "You are win."
-#define STR_LOSE "You are lose."
-#define STR_DRAW "Draw."
-
 void update_field(win_game* w_gm);
 
 void draw(win_game* w_gm);
@@ -45,32 +26,32 @@ win_game* win_game_create(ALLEGRO_DISPLAY* display, players player)
 {
 	win_game* w_gm = malloc(sizeof(*w_gm));
 
-	float start_x = (al_get_display_width(display) - SIZE_CELL * FIELD_SIZE) * PARAM_FIELD_X;
-	float start_y = (al_get_display_height(display) - SIZE_CELL * FIELD_SIZE) * PARAM_FIELD_Y;
+	float start_x = (al_get_display_width(display) - CELL_WH * FIELD_SIZE) * PARAM_FIELD_X;
+	float start_y = (al_get_display_height(display) - CELL_WH * FIELD_SIZE) * PARAM_FIELD_Y;
 
 	w_gm->gm = game_create(player);
 
 	int i, j;
 	for (i = 0; i < FIELD_SIZE; ++i) {
 		for (j = 0; j < FIELD_SIZE; ++j) {
-			float x = start_x + j * SIZE_CELL;
-			float y = start_y + i * SIZE_CELL;
+			float x = start_x + j * CELL_WH;
+			float y = start_y + i * CELL_WH;
 
-			rectangle* rect = rectangle_create(x, y, SIZE_CELL, SIZE_CELL, COLOR_CELL_BACKGROUND, COLOR_CELL_BORDER, SIZE_CELL_BORDER);
-			w_gm->field[i][j] = title_create(rect, "", SIZE_TEXT_IN_CELL, COLOR_CELL_TEXT);
+			rectangle* rect = rectangle_create(x, y, CELL_WH, CELL_WH, COLOR_CELL_BACKGROUND, COLOR_CELL_BORDER, CELL_BORDER_SIZE);
+			w_gm->field[i][j] = title_create(rect, "", CELL_FONT_SIZE, COLOR_CELL_TEXT);
 		}
 	} 
 
-	float x = (al_get_display_width(display) - SIZE_CELL * FIELD_SIZE) * PARAM_BUTTON_X;
+	float x = (al_get_display_width(display) - CELL_WH * FIELD_SIZE) * PARAM_BUTTON_X;
 	float y = al_get_display_height(display) - BUTTON_HEIGHT * PARAM_BUTTON_Y;
 
-	rectangle* rect = rectangle_create(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, COLOR_BUTTON_BACKGROUND, COLOR_BUTTON_BORDER, BUTTON_SIZE_BORDER);
-	w_gm->button = title_create(rect, BUTTON_TEXT, BUTTON_SIZE_TEXT, COLOR_BUTTON_TEXT);
+	rectangle* rect = rectangle_create(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, COLOR_BUTTON_BACKGROUND, COLOR_BUTTON_BORDER, BUTTON_BORDER_SIZE);
+	w_gm->button = title_create(rect, STR_BACK, BUTTON_FONT_SIZE, COLOR_BUTTON_TEXT);
 
-	x = (al_get_display_width(display) - MESS_WIDTH) / 2;
-	y = start_y - MESS_HEIGHT * PARAM_MESS_Y;
-	rect = rectangle_create(x, y, MESS_WIDTH, MESS_HEIGHT, COLOR_BUTTON_BACKGROUND, COLOR_BUTTON_BORDER, BUTTON_SIZE_BORDER);
-	w_gm->mess = title_create(rect, "", BUTTON_SIZE_TEXT, COLOR_BUTTON_TEXT);
+	x = (al_get_display_width(display) - LABEL_WIDTH) / 2;
+	y = start_y - LABEL_HEIGHT * PARAM_MESS_Y;
+	rect = rectangle_create(x, y, LABEL_WIDTH, LABEL_HEIGHT, COLOR_LABEL_BACKGROUND, COLOR_LABEL_BORDER, LABEL_BORDER_SIZE);
+	w_gm->mess = title_create(rect, "", LABEL_FONT_SIZE, COLOR_LABEL_TEXT);
 
 	update_field(w_gm);
 
@@ -118,11 +99,11 @@ void win_game_start(win_game* w_gm)
 
 				if (game_is_end(w_gm->gm)) {
 					if (game_is_draw(w_gm->gm)) {
-						title_update_text(w_gm->mess, STR_DRAW);
+						title_update_text(w_gm->mess, STR_MESS_DRAW);
 					} else if (game_get_win(w_gm->gm) == w_gm->gm->player) {
-						title_update_text(w_gm->mess, STR_WIN);
+						title_update_text(w_gm->mess, STR_MESS_WIN);
 					} else {
-						title_update_text(w_gm->mess, STR_LOSE);
+						title_update_text(w_gm->mess, STR_MESS_LOSE);
 					}
 
 					draw(w_gm);
@@ -159,13 +140,13 @@ void update_field(win_game* w_gm)
 		for (j = 0; j < FIELD_SIZE; ++j) {
 			switch(w_gm->gm->field[i][j]) {
 				case CROSS:
-					title_update_text(w_gm->field[i][j], CROSS_STR);
+					title_update_text(w_gm->field[i][j], STR_CROSS);
 					break;
 				case ZERO:
-					title_update_text(w_gm->field[i][j], ZERO_STR);
+					title_update_text(w_gm->field[i][j], STR_ZERO);
 					break;
 				default:
-					title_update_text(w_gm->field[i][j], EMPTY_STR);
+					title_update_text(w_gm->field[i][j], STR_EMPTY);
 			}
 		}
 	}

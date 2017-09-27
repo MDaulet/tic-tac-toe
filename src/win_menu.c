@@ -2,6 +2,7 @@
 #include "rectangle.h"
 #include "game.h"
 #include "color.h"
+#include "str.h"
 
 #include <stdlib.h>
 
