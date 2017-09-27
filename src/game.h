@@ -35,4 +35,6 @@ bool game_is_draw(game* gm);
 
 void game_destroy(game* gm);
 
+void game_run_pc(game* gm);
+
 #endif

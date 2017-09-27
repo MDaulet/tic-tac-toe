@@ -2,8 +2,6 @@
 
 #include <stdlib.h>
 
-void run_pc(game* gm);
-
 players back_player(players player);
 
 void change_current_player(game* gm);
@@ -33,7 +31,7 @@ game* game_create(players player)
 	gm->player = player;
 
 	if (gm->player == ZERO) {
-		run_pc(gm);
+		game_run_pc(gm);
 	}
 
 	return gm;
@@ -45,8 +43,6 @@ void game_click(game* gm, int row, int col)
 	if (gm->current_player == gm->player && gm->field[row][col] == EMPTY) {
 		gm->field[row][col] = gm->current_player;
 		change_current_player(gm);
-
-		if (!game_is_end(gm)) run_pc(gm);
 	}
 }
 
@@ -77,7 +73,7 @@ void game_destroy(game* gm)
 	free(gm);
 }
 
-void run_pc(game* gm)
+void game_run_pc(game* gm)
 {
 	players** copy_field = calloc(SIZE_FIELD, sizeof(*copy_field));
 	int i, j;
