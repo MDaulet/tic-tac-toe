@@ -1,6 +1,10 @@
+/**
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com*
+ * \file
+ * \brief Файл, в котором реализованы тела функций из файла \b "rectangle.h". \endb
+ */
 #include "rectangle.h"
 
-#include <stdio.h>
 #include <stdlib.h>
 
 rectangle* rectangle_create(float x, float y, float width, float height, ALLEGRO_COLOR background_color, ALLEGRO_COLOR border_color, float border_size)

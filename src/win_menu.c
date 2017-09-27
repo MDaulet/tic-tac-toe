@@ -1,3 +1,8 @@
+/**
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com*
+ * \file
+ * \brief Файл, в котором реализованы тела функций из файла \b "win_menu.h". \endb
+ */
 #include "win_menu.h"
 #include "rectangle.h"
 #include "game.h"
@@ -7,13 +12,46 @@
 
 #include <stdlib.h>
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+
+/**
+ * \brief Параметр для выравнивания меню по оси OX.
+ */
 #define PARAM_START_X 0.3
+
+/**
+ * \brief Параметр для выравнивания меню по оси OY.
+ */
 #define PARAM_START_Y 0.25
+
+/**
+ * \brief Параметр для вычисления отступов между элементами меню.
+ */
 #define PARAM_BETWEEN 1.5
+
+/**
+ * \brief Параметр выравнивания.
+ */
 #define PARAM_HALF 0.5
 
+/**
+ * \brief      Поиск максимума.
+ *
+ * \param      a     Первый элемент.
+ * \param      b     Второй элемент.
+ *
+ * \return     Максимальный из двух элементов.
+ */
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 
+#endif 
+
+/**
+ * \brief      Отрисовка интерфейса главного меню.
+ *
+ * \param      win_me  Адрес интерфейса главного меню, 
+ * который нужно отрисовать.
+ */
 static void draw(win_menu* win_me);
 
 win_menu* win_menu_create(ALLEGRO_DISPLAY* display)

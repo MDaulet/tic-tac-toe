@@ -1,12 +1,33 @@
+/**
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com
+ * 	
+ * \file 
+ * \brief Файл, в котором реализована функция #main - точка входа в приложение.
+ */
 #include "game.h"
 #include "win_game.h"
 #include "win_menu.h"
 
 #include <allegro5/allegro.h>
 
+/**
+ * \brief Ширина окна приложение.
+ */
 #define SCREEN_WIDTH 640
+
+/**
+ * \brief Высота окна приложения.
+ */
 #define SCREEN_HEIGHT 480
 
+/**
+ * @brief      Точка входа приложения.
+ *
+ * @return     
+ * 			- \b 0, \endb если программа корректно завершила свою работу.
+ * 			- Отличное от нуля число, если в ходе выполнения 
+ * 			программы возникла ошибка.
+ */
 int main() {
 	if (!al_init()) {
 		//ERROR

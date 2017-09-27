@@ -1,9 +1,25 @@
+/**
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com*
+ * \file
+ * \brief Файл, в котором реализованы тела функций из файла \b "title.h". \endb
+ */
 #include "title.h"
 
 #include <string.h>
 
+#ifndef DOXYGEN_SHOULD_SKIP_THIS
+
+/**
+ * \brief Параметр выравнивания текста надписи по оси OX.
+ */
 #define PARAM_CALC_X 0.5
+
+/**
+ * \brief Параметр выравнивания текста надписи по оси OY.
+ */
 #define PARAM_CALC_Y 0.25
+
+#endif 
 
 title* title_create(rectangle* rect, const char* text, int font_size, ALLEGRO_COLOR text_color)
 {

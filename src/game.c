@@ -1,19 +1,75 @@
+/**
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com*
+ * \file
+ * \brief Файл, в котором реализованы тела функций из файла \b "game.h". \endb
+ */
 #include "game.h"
 #include "constants.h"
 
 #include <stdlib.h>
 
-players back_player(players player);
+/**
+ * \brief      Получение противника игра.
+ *
+ * \param[in]  player  Игрок, для которого необходимо найти противника.
+ *
+ * \return     Противник.
+ */
+static players back_player(players player);
 
-void change_current_player(game* gm);
+/**
+ * \brief      Передача хода следующему игроку.
+ *
+ * \param      gm    Адрес модели игры, в которой нужно передать ход.
+ */
+static void change_current_player(game* gm);
 
-bool check_win(players** field, players p);
+/**
+ * \brief      Проверка: победил ли заданный игрок?
+ *
+ * \param      field  Адрес поля игры.
+ * \param[in]  p      Игрок.
+ *
+ * \return     
+ * 			- \b true, \endb если игрок победил.
+ * 			- \b false, \endb в противном случае.
+ */
+static bool check_win(players** field, players p);
 
-bool check_draw(players** field);
+/**
+ * \brief      Проверка: закончилась ли игра в ничью?
+ *
+ * \param      field  Адрес поля игры.
+ *
+ * \return     
+ * 			- \b true, \endb если игра закончилась в ничью.
+ * 			- \b false, \endb в противном случае.
+ */
+static bool check_draw(players** field);
 
-bool check_end(players** field);
+/**
+ * \brief      Проверка: закончилась ли игра?
+ *
+ * \param      field  Адрес поля игры.
+ *
+ * \return     
+ * 			- \b true, \endb если игра закончилась.
+ * 			- \b false, \endb в противном случае.
+ */
+static bool check_end(players** field);
 
-players search_win(players** field, players p);
+/**
+ * \brief      Поиск победителя при лучшей стратегии обеих игроков.
+ *
+ * \param      field  Адрес поля.
+ * \param[in]  p      Игрок, который должен ходить.
+ *
+ * \return     
+ * 			- \b #CROSS, \endb если победили крестики.
+ * 			- \b #ZERO, \endb если победили нолики.
+ * 			- \b #EMPTY, \endb в остальных случаях.
+ */
+static players search_win(players** field, players p);
 
 game* game_create(players player)
 {
