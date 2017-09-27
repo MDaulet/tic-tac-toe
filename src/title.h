@@ -24,4 +24,6 @@ void title_draw(title* tit);
 
 void title_destroy(title* tit);
 
+void title_update_text(title* tit, const char* text);
+
 #endif

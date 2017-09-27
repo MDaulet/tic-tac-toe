@@ -21,7 +21,7 @@ void title_draw(title* tit)
 {
 	rectangle_draw(tit->rect);	
 	float x = tit->rect->x + al_get_bitmap_width(tit->rect->background) / 2;
-	float y = tit->rect->y + al_get_bitmap_height(tit->rect->background) / 2;
+	float y = tit->rect->y + al_get_bitmap_height(tit->rect->background) / 4;
 	al_draw_text(tit->font, tit->text_color, x, y, ALLEGRO_ALIGN_CENTRE, tit->text);
 }
 
