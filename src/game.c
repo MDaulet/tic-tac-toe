@@ -95,6 +95,7 @@ void game_run_pc(game* gm)
 
 			copy_field[i][j] = pc;
 			players current_win = search_win(copy_field, gm->player);
+			copy_field[i][j] = EMPTY;
 
 			if (current_win == pc || (win != pc && current_win == EMPTY) || (win == gm->player)) {
 				win = current_win;
