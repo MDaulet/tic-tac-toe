@@ -13,6 +13,7 @@ struct win_game
 	title* field[SIZE_FIELD][SIZE_FIELD];
 	game* gm;
 	title* button;
+	title* mess;
 	ALLEGRO_DISPLAY* display;
 };
 

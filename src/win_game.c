@@ -33,6 +33,15 @@
 #define PARAM_BUTTON_X 0.5
 #define PARAM_BUTTON_Y 1.5
 
+#define PARAM_MESS_Y 1.5
+
+#define MESS_WIDTH 200
+#define MESS_HEIGHT 50
+
+#define STR_WIN "You are win."
+#define STR_LOSE "You are lose."
+#define STR_DRAW "Draw."
+
 #define COLOR_BACKGROUND_WINDOW al_map_rgb(230, 230, 230)
 
 void update_field(win_game* w_gm);
@@ -64,6 +73,11 @@ win_game* win_game_create(ALLEGRO_DISPLAY* display, players player)
 
 	rectangle* rect = rectangle_create(x, y, BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_COLOR_BACKGROUND, BUTTON_COLOR_BORDER, BUTTON_SIZE_BORDER);
 	w_gm->button = title_create(rect, BUTTON_TEXT, BUTTON_SIZE_TEXT, BUTTON_COLOR_TEXT);
+
+	x = (al_get_display_width(display) - MESS_WIDTH) / 2;
+	y = start_y - MESS_HEIGHT * PARAM_MESS_Y;
+	rect = rectangle_create(x, y, MESS_WIDTH, MESS_HEIGHT, BUTTON_COLOR_BACKGROUND, BUTTON_COLOR_BORDER, BUTTON_SIZE_BORDER);
+	w_gm->mess = title_create(rect, "", BUTTON_SIZE_TEXT, BUTTON_COLOR_TEXT);
 
 	update_field(w_gm);
 
@@ -108,7 +122,19 @@ void win_game_start(win_game* w_gm)
 					game_run_pc(w_gm->gm);
 					draw(w_gm);
 				}
-			}
+
+				if (game_is_end(w_gm->gm)) {
+					if (game_is_draw(w_gm->gm)) {
+						title_update_text(w_gm->mess, STR_DRAW);
+					} else if (game_get_win(w_gm->gm) == w_gm->gm->player) {
+						title_update_text(w_gm->mess, STR_WIN);
+					} else {
+						title_update_text(w_gm->mess, STR_LOSE);
+					}
+
+					draw(w_gm);
+				}
+			} 
 
 			if (rectangle_inside(w_gm->button->rect, x, y)) {
 				break;
@@ -128,6 +154,7 @@ void win_game_destroy(win_game* w_gm)
 		}
 	}
 	title_destroy(w_gm->button);
+	title_destroy(w_gm->mess);
 	game_destroy(w_gm->gm);
 	free(w_gm);
 }
@@ -166,6 +193,7 @@ void draw(win_game* w_gm)
 	}
 
 	title_draw(w_gm->button);
+	title_draw(w_gm->mess);
 
 	al_flip_display();
 }
