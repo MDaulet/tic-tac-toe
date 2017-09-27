@@ -1,13 +1,14 @@
 /**
- * \author Mахамбетали Дуалет, 77003820792d@gmail.com
- * 	
+ * \author Mахамбетали Дуалет, 77003820792d\gmail.com
  * \file 
  * \brief Файл, в котором реализована функция #main - точка входа в приложение.
  */
 #include "game.h"
 #include "win_game.h"
 #include "win_menu.h"
+#include "str.h"
 
+#include <stdio.h>
 #include <allegro5/allegro.h>
 
 /**
@@ -21,21 +22,21 @@
 #define SCREEN_HEIGHT 480
 
 /**
- * @brief      Точка входа приложения.
+ * \brief      Точка входа приложения.
  *
- * @return     
+ * \return     
  * 			- \b 0, \endb если программа корректно завершила свою работу.
  * 			- Отличное от нуля число, если в ходе выполнения 
  * 			программы возникла ошибка.
  */
 int main() {
 	if (!al_init()) {
-		//ERROR
+		perror(ERR_INIT_ALLEGRO);
 		return -1;
 	}
 
 	if (!al_install_mouse()) {
-		//ERROR
+		perror(ERR_INSTALL_MOUSE);
 		return -1;
 	}
 
@@ -44,7 +45,7 @@ int main() {
 
 	ALLEGRO_DISPLAY* display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
 	if (display == NULL) {
-		//ERROR
+		perror(ERR_CREATE_DISPLAY);
 		return -1;
 	}
 
@@ -61,7 +62,6 @@ int main() {
 		win_game_start(win_gm);
 		win_game_destroy(win_gm);
 	}
-
 
 	al_destroy_display(display);
 	return 0;

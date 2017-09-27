@@ -5,7 +5,9 @@
  */
 #include "game.h"
 #include "constants.h"
+#include "str.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -73,6 +75,10 @@ static players search_win(players** field, players p);
 
 game* game_create(players player)
 {
+	if (player == EMPTY) {
+		perror(ERR_PLAY_EMPTY);
+		exit(-1);
+	}
 	game* gm = malloc(sizeof(*gm));
 	gm->field = calloc(FIELD_SIZE, sizeof(*(gm->field)));
 
@@ -96,7 +102,11 @@ game* game_create(players player)
 
 void game_click(game* gm, int row, int col)
 {
-	//ERROR
+	if (row < 0 || row >= FIELD_SIZE || col < 0 || col >= FIELD_SIZE) {
+		perror(ERR_OUTSIDE_FIELD);
+		exit(-1);
+	}
+
 	if (gm->current_player == gm->player && gm->field[row][col] == EMPTY) {
 		gm->field[row][col] = gm->current_player;
 		change_current_player(gm);
@@ -178,8 +188,8 @@ players back_player(players player)
 		case CROSS: return ZERO;
 		case ZERO: return CROSS;
 		default:
-			return EMPTY;
-			//ERROR
+			perror(ERR_BACK_EMPTY);
+			exit(-1);
 	}
 }
 
@@ -190,6 +200,11 @@ void change_current_player(game* gm)
 
 bool check_win(players** field, players p)
 {
+	if (p == EMPTY) {
+		perror(ERR_WIN_EMPTY);
+		exit(-1);
+	}
+
 	int i, j, count;
 	for (i = 0; i < FIELD_SIZE; ++i) {
 		count = 0;
@@ -240,6 +255,11 @@ bool check_end(players** field)
 
 players search_win(players** field, players player)
 {
+	if (player == EMPTY) {
+		perror(ERR_MOVE_EMPTY);
+		exit(-1);
+	}
+	
 	if (check_end(field)) {
 		if (check_win(field, CROSS)) return CROSS;
 		else if (check_win(field, ZERO)) return ZERO;

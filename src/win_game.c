@@ -9,9 +9,9 @@
 #include "str.h"
 #include "constants.h"
 
-#include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
-#include <stdio.h> //DEBUG
+#include <stdbool.h>
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
 
@@ -109,7 +109,10 @@ win_game* win_game_create(ALLEGRO_DISPLAY* display, players player)
 void win_game_start(win_game* win_gm)
 {
 	ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
-	//if (event_queue == NULL) //ERROR
+	if (event_queue == NULL) {
+		perror(ERR_EVENT_QUEUE);
+		exit(-1);
+	}
 
 	al_register_event_source(event_queue, al_get_display_event_source(win_gm->display));
 	al_register_event_source(event_queue, al_get_mouse_event_source());

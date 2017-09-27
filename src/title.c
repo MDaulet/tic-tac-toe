@@ -4,7 +4,10 @@
  * \brief Файл, в котором реализованы тела функций из файла \b "title.h". \endb
  */
 #include "title.h"
+#include "str.h"
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -29,8 +32,11 @@ title* title_create(rectangle* rect, const char* text, int font_size, ALLEGRO_CO
 	tit->text = calloc(strlen(text) + 1, sizeof(*(tit->text)));
 	strcpy(tit->text, text);
 
-	tit->font = al_load_ttf_font("res/Doux.ttf", font_size, 0);
-	//if (tit->font == NULL) //ERROR
+	tit->font = al_load_ttf_font(PATH_FONT, font_size, 0);
+	if (tit->font == NULL) {
+		perror(ERR_LOAD_FONT);
+		exit(-1);
+	}
 
 	tit->text_color = text_color;
 	return tit;

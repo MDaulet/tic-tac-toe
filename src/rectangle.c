@@ -4,7 +4,9 @@
  * \brief Файл, в котором реализованы тела функций из файла \b "rectangle.h". \endb
  */
 #include "rectangle.h"
+#include "str.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 rectangle* rectangle_create(float x, float y, float width, float height, ALLEGRO_COLOR background_color, ALLEGRO_COLOR border_color, float border_size)
@@ -15,15 +17,26 @@ rectangle* rectangle_create(float x, float y, float width, float height, ALLEGRO
 
 	float w = width - 2 * border_size;
 	float h = height - 2 * border_size;
+	if (w <= 0 || h <= 0) {
+		perror(ERR_LARGE_BORDER);
+		exit(-1);
+	}
+
 	rect->background = al_create_bitmap(w, h);
 	al_set_target_bitmap(rect->background);
 	al_clear_to_color(background_color);
-	//if (rect->bitmap_background == NULL) //ERROR;
+	if (rect->background == NULL) {
+		perror(ERR_CREATE_BITMAP);
+		exit(-1);
+	}
 
 	rect->border = al_create_bitmap(width, height);
 	al_set_target_bitmap(rect->border);
 	al_clear_to_color(border_color);
-	//if (rect->bitmap_border == NULL) //ERROR;
+	if (rect->border == NULL) {
+		perror(ERR_CREATE_BITMAP);
+		exit(-1);	
+	}
 
 	rect->border_size = border_size;
 	return rect;

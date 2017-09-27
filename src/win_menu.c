@@ -1,5 +1,5 @@
 /**
- * \author Mахамбетали Дуалет, 77003820792d@gmail.com*
+ * \author Mахамбетали Дуалет, 77003820792d\gmail.com*
  * \file
  * \brief Файл, в котором реализованы тела функций из файла \b "win_menu.h". \endb
  */
@@ -10,6 +10,7 @@
 #include "str.h"
 #include "constants.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #ifndef DOXYGEN_SHOULD_SKIP_THIS
@@ -92,7 +93,10 @@ win_menu* win_menu_create(ALLEGRO_DISPLAY* display)
 players win_menu_start(win_menu* win_me)
 {
 	ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
-	//if (event_queue == NULL) //ERROR
+	if (event_queue == NULL) {
+		perror(ERR_EVENT_QUEUE);
+		exit(-1);
+	}
 
 	al_register_event_source(event_queue, al_get_display_event_source(win_me->display));
 	al_register_event_source(event_queue, al_get_mouse_event_source());
