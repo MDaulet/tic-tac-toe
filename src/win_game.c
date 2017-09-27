@@ -33,6 +33,8 @@
 #define PARAM_BUTTON_X 0.5
 #define PARAM_BUTTON_Y 1.5
 
+#define COLOR_BACKGROUND_WINDOW al_map_rgb(230, 230, 230)
+
 void update_field(win_game* w_gm);
 
 void draw(win_game* w_gm);
@@ -150,6 +152,8 @@ void update_field(win_game* w_gm)
 
 void draw(win_game* w_gm)
 {
+	al_clear_to_color(COLOR_BACKGROUND_WINDOW);
+	
 	int i, j;
 
 	update_field(w_gm);
