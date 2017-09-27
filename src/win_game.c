@@ -129,6 +129,7 @@ void win_game_destroy(win_game* w_gm)
 	}
 	title_destroy(w_gm->button);
 	game_destroy(w_gm->gm);
+	free(w_gm);
 }
 
 void update_field(win_game* w_gm)
@@ -153,7 +154,7 @@ void update_field(win_game* w_gm)
 void draw(win_game* w_gm)
 {
 	al_clear_to_color(COLOR_BACKGROUND_WINDOW);
-	
+
 	int i, j;
 
 	update_field(w_gm);
