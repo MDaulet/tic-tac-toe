@@ -1,6 +1,7 @@
 #ifndef RECT_H
 #define RECT_H
 
+#include <stdbool.h>
 #include <allegro5/allegro.h>
 
 struct rectangle
@@ -20,4 +21,5 @@ void rectangle_draw(rectangle* rect);
 
 void rectangle_destroy(rectangle* rect);
 
+bool rectangle_inside(rectangle* rect, float x, float y);
 #endif
