@@ -1,6 +1,7 @@
 #include "win_menu.h"
 #include "rectangle.h"
 #include "game.h"
+#include "color.h"
 
 #include <stdlib.h>
 
@@ -21,18 +22,12 @@
 #define PARAM_START_Y 0.25
 #define PARAM_BETWEEN 1.5
 
-#define COLOR_BACKGROUND al_map_rgb(255, 0, 0)
-#define COLOR_BORDER al_map_rgb(0, 255, 0)
-#define COLOR_TEXT al_map_rgb(0, 0, 255)
-
 #define SIZE_BORDER 5
 #define FONT_SIZE 26
 
 #define max(a, b) (((a) > (b)) ? (a) : (b))
 
 #define NUM_BUTTON_MOUSE 1
-
-#define COLOR_BACKGROUND_WINDOW al_map_rgb(230, 230, 230)
 
 static void draw(win_menu* win_me);
 
@@ -46,24 +41,24 @@ win_menu* win_menu_create(ALLEGRO_DISPLAY* display)
 	float width_max = max(max(WIDTH_MESS, WIDTH_EXIT), SIZE_CROSS_ZERO);
 
 	float xt = x + (width_max - WIDTH_MESS) / 2;
-	rectangle* rect = rectangle_create(xt, y, WIDTH_MESS, HEIGHT_MESS, COLOR_BACKGROUND, COLOR_BORDER, SIZE_BORDER);
-	win_me->mess = title_create(rect, TEXT_MESS, FONT_SIZE, COLOR_TEXT);
+	rectangle* rect = rectangle_create(xt, y, WIDTH_MESS, HEIGHT_MESS, COLOR_LABEL_BACKGROUND, COLOR_LABEL_BORDER, SIZE_BORDER);
+	win_me->mess = title_create(rect, TEXT_MESS, FONT_SIZE, COLOR_LABEL_TEXT);
 
 	y+= HEIGHT_MESS * 1.5;
 
 	xt = x + (width_max / 2 - SIZE_CROSS_ZERO) / 2;
-	rect = rectangle_create(xt, y, SIZE_CROSS_ZERO, SIZE_CROSS_ZERO, COLOR_BACKGROUND, COLOR_BORDER, SIZE_BORDER);
-	win_me->cross = title_create(rect, TEXT_CROSS, FONT_SIZE, COLOR_TEXT);
+	rect = rectangle_create(xt, y, SIZE_CROSS_ZERO, SIZE_CROSS_ZERO, COLOR_CELL_BACKGROUND, COLOR_CELL_BORDER, SIZE_BORDER);
+	win_me->cross = title_create(rect, TEXT_CROSS, FONT_SIZE, COLOR_CELL_TEXT);
 
 	xt = x + width_max / 2 + (width_max / 2 - SIZE_CROSS_ZERO) / 2;
-	rect = rectangle_create(xt, y, SIZE_CROSS_ZERO, SIZE_CROSS_ZERO, COLOR_BACKGROUND, COLOR_BORDER, SIZE_BORDER);
-	win_me->zero = title_create(rect, TEXT_ZERO, FONT_SIZE, COLOR_TEXT);
+	rect = rectangle_create(xt, y, SIZE_CROSS_ZERO, SIZE_CROSS_ZERO, COLOR_CELL_BACKGROUND, COLOR_CELL_BORDER, SIZE_BORDER);
+	win_me->zero = title_create(rect, TEXT_ZERO, FONT_SIZE, COLOR_CELL_TEXT);
 
 	y += SIZE_CROSS_ZERO * 1.5;
 
 	xt = x + (width_max - WIDTH_EXIT) / 2 ;
-	rect = rectangle_create(xt, y, WIDTH_EXIT, HEIGHT_EXIT, COLOR_BACKGROUND, COLOR_BORDER, SIZE_BORDER);
-	win_me->exit = title_create(rect, TEXT_EXIT, FONT_SIZE, COLOR_TEXT);
+	rect = rectangle_create(xt, y, WIDTH_EXIT, HEIGHT_EXIT, COLOR_BUTTON_BACKGROUND, COLOR_BUTTON_BORDER, SIZE_BORDER);
+	win_me->exit = title_create(rect, TEXT_EXIT, FONT_SIZE, COLOR_BUTTON_TEXT);
 
 	win_me->display = display;
 	al_set_target_bitmap(al_get_backbuffer(win_me->display));
@@ -120,7 +115,7 @@ void win_menu_destroy(win_menu* win_me)
 
 void draw(win_menu* win_me)
 {
-	al_clear_to_color(COLOR_BACKGROUND_WINDOW);
+	al_clear_to_color(COLOR_WINDOW_BACKGROUND);
 
 	title_draw(win_me->mess);
 	title_draw(win_me->cross);

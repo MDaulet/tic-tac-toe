@@ -10,7 +10,7 @@ typedef enum result_game result_game;
 
 struct win_game
 {
-	title* field[SIZE_FIELD][SIZE_FIELD];
+	title* field[FIELD_SIZE][FIELD_SIZE];
 	game* gm;
 	title* button;
 	title* mess;

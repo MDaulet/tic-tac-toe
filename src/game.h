@@ -3,7 +3,7 @@
 
 #include <stdbool.h>
 
-#define SIZE_FIELD 3
+#define FIELD_SIZE 3
 
 enum players
 {
