@@ -45,22 +45,24 @@ void game_click(game* gm, int row, int col)
 	if (gm->current_player == gm->player && gm->field[row][col] == EMPTY) {
 		gm->field[row][col] = gm->current_player;
 		change_current_player(gm);
+
+		if (!game_is_end(gm)) run_pc(gm);
 	}
 }
 
-bool is_end(game* gm)
+bool game_is_end(game* gm)
 {
 	return check_end(gm->field);
 }
 
-players get_win(game* gm)
+players game_get_win(game* gm)
 {
 	if (check_win(gm->field, CROSS)) return CROSS;
 	else if (check_win(gm->field, ZERO)) return ZERO;
 	else return EMPTY;
 }
 
-bool is_draw(game* gm)
+bool game_is_draw(game* gm)
 {
 	return check_draw(gm->field);
 }
