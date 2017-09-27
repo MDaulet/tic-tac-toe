@@ -23,8 +23,8 @@ title* title_create(rectangle* rect, const char* text, int font_size, ALLEGRO_CO
 void title_draw(title* tit)
 {
 	rectangle_draw(tit->rect);	
-	float x = tit->rect->x + al_get_bitmap_width(tit->rect->background) * PARAM_CALC_X;
-	float y = tit->rect->y + al_get_bitmap_height(tit->rect->background) * PARAM_CALC_Y;
+	float x = tit->rect->x + al_get_bitmap_width(tit->rect->border) * PARAM_CALC_X;
+	float y = tit->rect->y + al_get_bitmap_height(tit->rect->border) * PARAM_CALC_Y;
 	al_draw_text(tit->font, tit->text_color, x, y, ALLEGRO_ALIGN_CENTRE, tit->text);
 }
 
