@@ -18,6 +18,7 @@ D_TESTS  := $(D_SRC)/tests
 FILES_C  := $(wildcard $(D_SRC)/*.c $(D_TESTS)/*.c)
 FILES_O  := $(FILES_C:.c=.o)
 D_UNITY  := 
+D_IMG    := images
 
 
 ifneq ($(D_UNITY),)
@@ -59,9 +60,12 @@ $(PROJECT): $(PROJECT_WITHOUT_TESTS_O)
 .phony: doxygen
 doxygen:
 	$(DG) $(D_DOC)/doxygen.config
+	cp -r -f $(D_DOC)/$(D_IMG) $(D_DOC)/output/html/doc
+	cp  ./LICENSE $(D_DOC)/output/html/
 
 .phony: html
 html: doxygen
+	
 
 .phony: pdf
 pdf: doxygen
