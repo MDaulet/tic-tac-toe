@@ -37,6 +37,8 @@ PROJECT_WITH_TESTS := $(FILES_TESTS_C) $(FILES_PROGR_C)
 
 PROJECT_WITHOUT_TESTS_O  := $(PROJECT_WITHOUT_TESTS:.c=.o)
 PROJECT_WITH_TESTS_O  := $(PROJECT_WITH_TESTS:.c=.o)
+FILES_C  := $(wildcard $(D_SRC)/*.c)
+FILES_O  := $(FILES_C:.c=.o)
 
 # ------------
 # Flags
@@ -65,7 +67,6 @@ doxygen:
 
 .phony: html
 html: doxygen
-	
 
 .phony: pdf
 pdf: doxygen
