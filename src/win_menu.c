@@ -1,5 +1,5 @@
 /**
- * \author Mахамбетали Дуалет, 77003820792d\gmail.com*
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com
  * \file
  * \brief Файл, в котором реализованы тела функций из файла \b "win_menu.h". \endb
  */
@@ -9,6 +9,7 @@
 #include "color.h"
 #include "str.h"
 #include "constants.h"
+#include "error.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -94,8 +95,7 @@ players win_menu_start(win_menu* win_me)
 {
 	ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
 	if (event_queue == NULL) {
-		perror(ERR_EVENT_QUEUE);
-		exit(-1);
+		error_send(ERR_EVENT_QUEUE);
 	}
 
 	al_register_event_source(event_queue, al_get_display_event_source(win_me->display));

@@ -1,11 +1,12 @@
 /**
- * \author Mахамбетали Дуалет, 77003820792d@gmail.com*
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com
  * \file
  * \brief Файл, в котором реализованы тела функций из файла \b "game.h". \endb
  */
 #include "game.h"
 #include "constants.h"
 #include "str.h"
+#include "error.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -76,9 +77,9 @@ static players search_win(players** field, players p);
 game* game_create(players player)
 {
 	if (player == EMPTY) {
-		perror(ERR_PLAY_EMPTY);
-		exit(-1);
+		error_send(ERR_PLAY_EMPTY);
 	}
+
 	game* gm = malloc(sizeof(*gm));
 	gm->field = calloc(FIELD_SIZE, sizeof(*(gm->field)));
 
@@ -103,8 +104,7 @@ game* game_create(players player)
 void game_click(game* gm, int row, int col)
 {
 	if (row < 0 || row >= FIELD_SIZE || col < 0 || col >= FIELD_SIZE) {
-		perror(ERR_OUTSIDE_FIELD);
-		exit(-1);
+		error_send(ERR_OUTSIDE_FIELD);
 	}
 
 	if (gm->current_player == gm->player && gm->field[row][col] == EMPTY) {
@@ -188,8 +188,8 @@ players back_player(players player)
 		case CROSS: return ZERO;
 		case ZERO: return CROSS;
 		default:
-			perror(ERR_BACK_EMPTY);
-			exit(-1);
+			error_send(ERR_BACK_EMPTY);
+			return EMPTY;
 	}
 }
 
@@ -201,8 +201,7 @@ void change_current_player(game* gm)
 bool check_win(players** field, players p)
 {
 	if (p == EMPTY) {
-		perror(ERR_WIN_EMPTY);
-		exit(-1);
+		error_send(ERR_WIN_EMPTY);
 	}
 
 	int i, j, count;
@@ -256,8 +255,7 @@ bool check_end(players** field)
 players search_win(players** field, players player)
 {
 	if (player == EMPTY) {
-		perror(ERR_MOVE_EMPTY);
-		exit(-1);
+		error_send(ERR_MOVE_EMPTY);
 	}
 	
 	if (check_end(field)) {

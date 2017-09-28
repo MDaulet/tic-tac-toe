@@ -1,5 +1,5 @@
 /**
- * \author Mахамбетали Дуалет, 77003820792d@gmail.com*
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com
  * \file
  * \brief Файл, в котором реализованы тела функций из файла \b "win_game.h". \endb
  */
@@ -8,6 +8,7 @@
 #include "color.h"
 #include "str.h"
 #include "constants.h"
+#include "error.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -52,8 +53,7 @@
 #endif 
 
 /**
- * \public
- * \brief      Обвноления состояния элементов интерфейса.
+ * \brief      Обвновления состояния элементов интерфейса.
  *
  * \param      win_gm  Адрес интерфейса игры, 
  * для элементов которого нужно обновить состояние.
@@ -110,8 +110,7 @@ void win_game_start(win_game* win_gm)
 {
 	ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue();
 	if (event_queue == NULL) {
-		perror(ERR_EVENT_QUEUE);
-		exit(-1);
+		error_send(ERR_EVENT_QUEUE);
 	}
 
 	al_register_event_source(event_queue, al_get_display_event_source(win_gm->display));

@@ -1,5 +1,5 @@
 /**
- * \author Mахамбетали Дуалет, 77003820792d\gmail.com
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com
  * \file 
  * \brief Файл, в котором реализована функция #main - точка входа в приложение.
  */
@@ -7,19 +7,10 @@
 #include "win_game.h"
 #include "win_menu.h"
 #include "str.h"
+#include "constants.h"
 
 #include <stdio.h>
 #include <allegro5/allegro.h>
-
-/**
- * \brief Ширина окна приложение.
- */
-#define SCREEN_WIDTH 640
-
-/**
- * \brief Высота окна приложения.
- */
-#define SCREEN_HEIGHT 480
 
 /**
  * \brief      Точка входа приложения.

@@ -14,10 +14,17 @@ DG  := doxygen
 # --------------------
 D_SRC    := ./src
 D_DOC    := ./doc
-FILES_C  := $(wildcard $(D_SRC)/*.c)
+D_TESTS  := $(D_SRC)/tests
+FILES_C  := $(wildcard $(D_SRC)/*.c $(D_TESTS)/*.c)
 FILES_O  := $(FILES_C:.c=.o)
 D_UNITY  := 
-D_TESTS  := $(D_SRC)/tests
+
+
+ifneq ($(D_UNITY),)
+	MACRO_TESTING := -DTESTING
+else
+	MACRO_TESTING := 
+endif
 
 ENTRY_POINT := $(D_SRC)/main.c
 
@@ -29,7 +36,6 @@ PROJECT_WITH_TESTS := $(FILES_TESTS_C) $(FILES_PROGR_C)
 
 PROJECT_WITHOUT_TESTS_O  := $(PROJECT_WITHOUT_TESTS:.c=.o)
 PROJECT_WITH_TESTS_O  := $(PROJECT_WITH_TESTS:.c=.o)
-
 
 # ------------
 # Flags
@@ -45,7 +51,7 @@ INCS := -I $(D_UNITY)/src -I $(D_UNITY)/extras/fixture/src
 default: $(PROJECT)
 
 %.o: %.c
-	$(CC) -c -I $(D_SRC) $(CFLAGS) $(INCS) $< -o $@ -lm
+	$(CC) $(MACRO_TESTING) -c -I $(D_SRC) $(CFLAGS) $(INCS) $< -o $@ -lm
 
 $(PROJECT): $(PROJECT_WITHOUT_TESTS_O)
 	$(CC) -I $(D_SRC) $(LFLAGS) $(PROJECT_WITHOUT_TESTS_O) -o $@ $(LIBALLEGRO)
@@ -63,10 +69,10 @@ pdf: doxygen
 
 .phony:	clean
 clean:
-	-$(RM) $(FILES_O) $(PROJECT) $(D_DOC)/output
+	-$(RM) $(FILES_O) $(PROJECT) test-$(PROJECT) $(D_DOC)/output 
 
 run-test: test-$(PROJECT)
 	./test-$(PROJECT)
 
 test-$(PROJECT): $(PROJECT_WITH_TESTS_O)
-	-$(RM) $(PROJECT_WITH_TESTS_O) $(D_SRC)/main.o $(PROJECT) test-$(PROJECT) $(D_DOC)/output
+	$(CC) -I $(D_SRC) $(LFLAGS) $(PROJECT_WITH_TESTS_O) -o $@ $(LIBALLEGRO)

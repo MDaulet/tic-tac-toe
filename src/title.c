@@ -1,10 +1,11 @@
 /**
- * \author Mахамбетали Дуалет, 77003820792d@gmail.com*
+ * \author Mахамбетали Дуалет, 77003820792d@gmail.com
  * \file
  * \brief Файл, в котором реализованы тела функций из файла \b "title.h". \endb
  */
 #include "title.h"
 #include "str.h"
+#include "error.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,8 +35,7 @@ title* title_create(rectangle* rect, const char* text, int font_size, ALLEGRO_CO
 
 	tit->font = al_load_ttf_font(PATH_FONT, font_size, 0);
 	if (tit->font == NULL) {
-		perror(ERR_LOAD_FONT);
-		exit(-1);
+		error_send(ERR_LOAD_FONT);
 	}
 
 	tit->text_color = text_color;
