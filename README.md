@@ -69,9 +69,9 @@ make pdf
 - Для Unit тестирование требуется библиотека [Unity Test API](https://github.com/ThrowTheSwitch/Unity).
 
 - Для сборки документации требуются следующие приложения:
- 1. [Doxygen](http://www.stack.nl/~dimitri/doxygen/).
- 2. [Graphviz](http://www.graphviz.org/).
- 3. [Text-live](https://www.tug.org/texlive/) (только для pdf документации).
+	1. [Doxygen](http://www.stack.nl/~dimitri/doxygen/).
+	2. [Graphviz](http://www.graphviz.org/).
+	3. [Text-live](https://www.tug.org/texlive/) (только для pdf документации).
 
 ## Авторы 
 * Mахамбетали Дуалет - 77003820792d@gmail.com
