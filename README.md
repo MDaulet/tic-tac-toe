@@ -74,7 +74,7 @@ make pdf
 	3. [Text-live](https://www.tug.org/texlive/) (только для pdf документации).
 
 ## Авторы 
-* Mахамбетали Дуалет - 77003820792d@gmail.com
+* Mахамбетали Даулет - 77003820792d@gmail.com
 
 ## License
 Этот проект распространяется под лицензией MIT - смотрите [LICENSE](./LICENSE) для уточнения.

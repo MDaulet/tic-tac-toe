@@ -62,6 +62,7 @@ $(PROJECT): $(PROJECT_WITHOUT_TESTS_O)
 .phony: doxygen
 doxygen:
 	$(DG) $(D_DOC)/doxygen.config
+	mkdir $(D_DOC)/output/html/doc
 	cp -r -f $(D_DOC)/$(D_IMG) $(D_DOC)/output/html/doc
 	cp  ./LICENSE $(D_DOC)/output/html/
 
